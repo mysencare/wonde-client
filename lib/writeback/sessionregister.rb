@@ -6,7 +6,7 @@ module Wonde
     end
 
     def to_json()
-            {'attendance' => [self.attendance]}.to_json
+      { 'attendance' => [self.attendance] }.to_json
     end
 
     def add(attendance)
