@@ -1,6 +1,6 @@
 module Wonde
-  class Detentions < Endpoints
-    @@uri = 'detentions/'
+  class AttendanceDetention < Endpoints
+    @@uri = 'attendance/detention'
     def initialize(token, id=false)
       super(token, id)
       self.endpoint = 'https://api-beta.edge.wonde.com/v1.0/' # remove line when out of beta
