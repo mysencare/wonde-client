@@ -10,7 +10,6 @@ module Wonde
     # Main endpoint, base URI
     @@endpoint = 'https://api.wonde.com/v1.0/'
 
-
     def initialize(token, uri=false)
       self.endpoint = @@endpoint
       self.uri = String.new()
@@ -34,7 +33,7 @@ module Wonde
     # @param url [String]
     # @return [Object]
     def getUrl(url)
-      RestClient::Request.execute(
+      response = RestClient::Request.execute(
         method: :get,
         url: url,
         headers: {
@@ -42,6 +41,8 @@ module Wonde
           "User-Agent" => "wonde-rb-client-#{self.version}"
         }
       )
+    ensure
+      log_request uri: url, response_body: response.body, method: :get, status: response.code
     end
 
     # Builds get request and passes it along
@@ -77,7 +78,7 @@ module Wonde
 
     def postUrl(url, body=Hash.new())
       puts body.to_json if ENV["debug_wonde"]
-      RestClient::Request.execute(
+      response = RestClient::Request.execute(
         method: :post,
         url: url,
         headers: {
@@ -88,6 +89,8 @@ module Wonde
         },
         payload: body.to_json,
       )
+    ensure
+      log_request uri: url, request_body: body.to_json, response_body: response.body, method: :post, status: response.code
     end
 
     def post(body=Hash.new())
@@ -107,7 +110,7 @@ module Wonde
 
     def deleteUrl(url, body=Hash.new())
       puts body.to_json if ENV["debug_wonde"]
-      RestClient::Request.execute(
+      response = RestClient::Request.execute(
         method: :delete,
         url: url,
         headers: {
@@ -118,6 +121,8 @@ module Wonde
         },
         payload: body.to_json,
       )
+    ensure
+      log_request uri: url, response_body: response.body, method: :delete, status: response.code
     end
 
     def delete(body=Hash.new())
@@ -146,6 +151,11 @@ module Wonde
       object = JSON.parse(response)
       puts object if ENV["debug_wonde"]
       object
+    end
+
+    def log_request(**data)
+      return unless defined?(ActiveSupport)
+      ActiveSupport::Notifications.instrument "request.wonde", **data
     end
   end
 end

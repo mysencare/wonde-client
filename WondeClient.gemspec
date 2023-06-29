@@ -14,7 +14,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rest-client', "~> 2.0"
   s.add_dependency 'addressable', "~> 2.5"
 
-
 Gem::Specification.new do |s|
   s.add_development_dependency 'pry'
   s.add_development_dependency 'debugger'
