@@ -42,7 +42,7 @@ module Wonde
         }
       )
     ensure
-      log_request uri: url, response_body: response.body, method: :get, status: response.code
+      log_request uri: url, response_body: response&.body, method: :get, status: response&.code
     end
 
     # Builds get request and passes it along
@@ -90,7 +90,7 @@ module Wonde
         payload: body.to_json,
       )
     ensure
-      log_request uri: url, request_body: body.to_json, response_body: response.body, method: :post, status: response.code
+      log_request uri: url, request_body: body.to_json, response_body: response&.body, method: :post, status: response&.code
     end
 
     def post(body=Hash.new())
@@ -122,7 +122,7 @@ module Wonde
         payload: body.to_json,
       )
     ensure
-      log_request uri: url, response_body: response.body, method: :delete, status: response.code
+      log_request uri: url, response_body: response&.body, method: :delete, status: response&.code
     end
 
     def delete(body=Hash.new())
