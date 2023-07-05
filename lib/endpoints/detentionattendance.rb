@@ -1,5 +1,5 @@
 module Wonde
-  class AttendanceDetention < Endpoints
+  class DetentionAttendance < Endpoints
     @@uri = 'attendance/detention'
     def initialize(token, id=false)
       super(token, id)

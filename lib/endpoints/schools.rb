@@ -6,7 +6,7 @@ module Wonde
                   :medicalNotes, :periods, :photos, :rooms, :subjects, :students,
                   :studentsPreAdmission,:achievementsAttributes,:behavioursAttributes,
                   :assessment, :deletions, :events, :attendanceSummaries, :detentions, :detentionTypes,
-                  :attendanceDetention, :detentionAttendanceCodes, :attendanceCodes
+                  :detentionAttendance, :detentionAttendanceCodes, :attendanceCodes
     @@uri = 'schools/'
     def initialize(token, id=false)
       super(token, id)
@@ -19,7 +19,6 @@ module Wonde
       self.assessment               = Wonde::Assessment.new(token, self.uri)
       self.attendance               = Wonde::Attendance.new(token, self.uri)
       self.attendanceCodes          = Wonde::AttendanceCodes.new(token, self.uri)
-      self.attendanceDetention      = Wonde::AttendanceDetention.new(token, self.uri)
       self.behaviours               = Wonde::Behaviours.new(token, self.uri)
       self.behavioursAttributes     = Wonde::BehavioursAttributes.new(token, self.uri)
       self.classes                  = Wonde::Classes.new(token, self.uri)
@@ -27,6 +26,7 @@ module Wonde
       self.counts                   = Wonde::Counts.new(token, self.uri)
       self.deletions                = Wonde::Deletions.new(token, self.uri)
       self.detentions               = Wonde::Detentions.new(token, self.uri)
+      self.detentionAttendance      = Wonde::DetentionAttendance.new(token, self.uri)
       self.detentionAttendanceCodes = Wonde::DetentionAttendanceCodes.new(token, self.uri)
       self.detentionTypes           = Wonde::DetentionTypes.new(token, self.uri)
       self.employees                = Wonde::Employees.new(token, self.uri)
