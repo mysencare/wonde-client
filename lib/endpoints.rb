@@ -41,7 +41,11 @@ module Wonde
           "User-Agent" => "wonde-rb-client-#{self.version}"
         }
       )
+    rescue RestClient::ExceptionWithResponse => e
+      @error_response = e.response
+      raise
     ensure
+      response ||= @error_response
       log_request uri: url, response_body: response&.body, method: :get, status: response&.code
     end
 
@@ -89,7 +93,11 @@ module Wonde
         },
         payload: body.to_json,
       )
+    rescue RestClient::ExceptionWithResponse => e
+      @error_response = e.response
+      raise
     ensure
+      response ||= @error_response
       log_request uri: url, request_body: body.to_json, response_body: response&.body, method: :post, status: response&.code
     end
 
@@ -121,7 +129,11 @@ module Wonde
         },
         payload: body.to_json,
       )
+    rescue RestClient::ExceptionWithResponse => e
+      @error_response = e.response
+      raise
     ensure
+      response ||= @error_response
       log_request uri: url, response_body: response&.body, method: :delete, status: response&.code
     end
 
