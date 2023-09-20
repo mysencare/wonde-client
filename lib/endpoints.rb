@@ -86,7 +86,7 @@ module Wonde
         method: :post,
         url: url,
         headers: {
-          "Authorization" => "Basic #{self.token}",
+          "Authorization" => "Bearer #{self.token}",
           "User-Agent" => "wonde-rb-client-#{self.version}",
           "Accept" => "application/json",
           "Content-Type" => "application/json",
@@ -122,7 +122,7 @@ module Wonde
         method: :delete,
         url: url,
         headers: {
-          "Authorization" => "Basic #{self.token}",
+          "Authorization" => "Bearer #{self.token}",
           "User-Agent" => "wonde-rb-client-#{self.version}",
           "Accept" => "application/json",
           "Content-Type" => "application/json",
