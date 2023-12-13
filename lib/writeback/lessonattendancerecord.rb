@@ -69,7 +69,7 @@ module Wonde
     end
 
     def setMinutesLate(minutes_late)
-      self.minutes_late = minutes_late
+      self.minutes_late = minutes_late.nil? ? nil : minutes_late.to_s
     end
   end
 end
