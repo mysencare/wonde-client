@@ -5,7 +5,7 @@ module Wonde
       super(token, id)
       self.uri = @@uri
       self.uri = id + '/' + @@uri if id
-      self.uri = self.uri.gsub("//", "/").chomp("/")
+      self.uri = self.uri.gsub("//", "/")
     end
   end
 end
