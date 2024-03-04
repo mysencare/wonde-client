@@ -137,8 +137,9 @@ module Wonde
       log_request uri: url, request_body: body.to_json, response_body: response&.body, method: :put, status: response&.code
     end
 
-    def put
-      hash_response = JSON.parse(self.putRequest(self.uri, body).body)
+    def put(id, body)
+      url = self.uri + '/' + id
+      hash_response = JSON.parse(self.putRequest(url, body).body)
       if hash_response.nil?
         return {}
       end
