@@ -109,6 +109,43 @@ module Wonde
       hash_response
     end
 
+    def putRequest(endpoint, body = {})
+      puts "self.endpoint:\n " + self.endpoint if ENV["debug_wonde"]
+      puts "endpoint:\n" + endpoint if ENV["debug_wonde"]
+      puts "body:\n" + body.to_json if ENV["debug_wonde"]
+      putUrl(self.endpoint + endpoint, body)
+    end
+
+    def putUrl(url, body = {})
+      puts body.to_json if ENV["debug_wonde"]
+      response = RestClient::Request.execute(
+        method: :put,
+        url:,
+        headers: {
+          "Authorization" => "Bearer #{self.token}",
+          "User-Agent" => "wonde-rb-client-#{self.version}",
+          "Accept" => "application/json",
+          "Content-Type" => "application/json",
+        },
+        payload: body.to_json,
+      )
+    rescue RestClient::ExceptionWithResponse => e
+      @error_response = e.response
+      raise
+    ensure
+      response ||= @error_response
+      log_request uri: url, request_body: body.to_json, response_body: response&.body, method: :put, status: response&.code
+    end
+
+    def put(id, body)
+      url = self.uri + '/' + id
+      hash_response = JSON.parse(self.putRequest(url, body).body)
+      if hash_response.nil?
+        return {}
+      end
+      hash_response
+    end
+
     def deleteRequest(endpoint, body=Hash.new())
       puts "self.endpoint: " + self.endpoint if ENV["debug_wonde"]
       puts "endpoint:" + endpoint if ENV["debug_wonde"]
