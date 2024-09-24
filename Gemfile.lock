@@ -46,6 +46,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-22
+  x86_64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
@@ -54,4 +55,4 @@ DEPENDENCIES
   wondeclient!
 
 BUNDLED WITH
-   2.4.7
+   2.5.11
