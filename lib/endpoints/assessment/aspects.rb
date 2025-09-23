@@ -7,5 +7,10 @@ module Wonde
       self.uri = id + '/' + @@uri if id
       self.uri = self.uri.gsub("//", "/").chomp("/")
     end
+
+    def get(id, includes = {}, parameters = {})
+      self.uri = "#{uri}/"
+      super
+    end
   end
 end
